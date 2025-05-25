@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NerdForge | Python Development Courses</title>
+    <meta name="description" content="Transform from beginner to Python professional with our project-based courses">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar" id="navbar">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.89 1.5c.37-.83 1.16-1.36 2.03-1.36h.11c.87 0 1.66.53 2.03 1.36l4.43 10.12a2 2 0 0 1 1.79 2.03v5.35a2 2 0 0 1-2 2H5.66a2 2 0 0 1-2-2v-5.35a2 2 0 0 1 1.79-2.03L10.89 1.5zM7.5 17a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm9 0a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0z"/></svg>
+            </div>
+            <div class="logo-wrapper">
+                <h1 class="logo-text">NerdForge</h1>
+                <span class="logo-tagline">Forge Your Python Future</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="courses.html">Courses</a>
+            <a href="features.html">Features</a>
+            <a href="pages/code.html">Code Now</a>
+            <a href="testimonials.html">Success Stories</a>
+            <a href="pages/about.html">About Us</a>
+        </nav>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-sun"></i>
+                <span class="sr-only">Toggle Theme</span>
+            </button>
+            <button class="btn btn-primary" id="register-btn">Sign Up</button>
+            <div class="user-avatar" id="user-avatar">
+                <i class="fas fa-user"></i>
+                <div class="user-menu" id="user-menu">
+                    <a href="#">Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <h2 class="modal-title">Start Coding With Us</h2>
+            <form class="auth-form" id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Start Learning Python</button>
+                <div class="form-actions">
+                    <a href="#" class="form-link" id="login-link-from-signup">Already have an account? Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <h2 class="modal-title">Continue Your Journey</h2>
+            <form class="auth-form" id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Continue Coding</button>
+                <div class="form-actions">
+                    <a href="#" class="form-link" id="signup-link-from-login">New to Python? Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-bg-circle"></div>
+                <div class="hero-bg-circle"></div>
+                <div class="hero-bg-circle"></div>
+            </div>
+            <div class="hero-content">
+                <h1>
+                    <span>Master Python</span> and Build
+                    Your Developer Career
+                </h1>
+                <p class="hero-tagline">
+                    Project-based courses designed to make you job-ready in Python development
+                </p>
+                <button class="btn btn-primary">
+                    Start Coding Today <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Python code on screen" class="hero-image" id="hero-image">
+        </section>
+
+        <section id="courses" class="courses-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Python Courses</h2>
+                    <p>
+                        Choose from our project-based Python courses designed to
+                        take you from beginner to professional developer.
+                    </p>
+                </div>
+                <div class="course-cards">
+                    <div class="course-card">
+                        <div class="course-badge">Most Popular</div>
+                        <h3 class="course-card-title">Python Fundamentals</h3>
+                        <p class="course-card-description">
+                            Master Python basics, data structures, and algorithms through
+                            hands-on projects and coding challenges.
+                        </p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 8 Weeks</span>
+                            <span><i class="fas fa-star"></i> 4.9/5</span>
+                        </div>
+                        <a href="#" class="course-card-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-badge">New</div>
+                        <h3 class="course-card-title">Python for Data Science</h3>
+                        <p class="course-card-description">
+                            Learn Pandas, NumPy, Matplotlib and build real data analysis
+                            projects with Python.
+                        </p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 10 Weeks</span>
+                            <span><i class="fas fa-star"></i> 4.8/5</span>
+                        </div>
+                        <a href="#" class="course-card-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="course-card">
+                        <h3 class="course-card-title">Django Web Development</h3>
+                        <p class="course-card-description">
+                            Build full-featured web applications with Django, from simple
+                            blogs to complex SaaS platforms.
+                        </p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 12 Weeks</span>
+                            <span><i class="fas fa-star"></i> 4.7/5</span>
+                        </div>
+                        <a href="#" class="course-card-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Learn Python With Us</h2>
+                    <p>
+                        Our platform is designed specifically to help you master Python
+                        through practical, real-world projects.
+                    </p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Python-Centric Curriculum</h3>
+                            <p class="feature-description">
+                                Focused entirely on Python and its ecosystem, from basics to
+                                advanced frameworks.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Interactive Coding</h3>
+                            <p class="feature-description">
+                                Practice Python directly in your browser with our built-in
+                                coding environment.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Real Projects</h3>
+                            <p class="feature-description">
+                                Build portfolio-worthy Python projects that demonstrate
+                                real-world skills.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Career Focused</h3>
+                            <p class="feature-description">
+                                Python career paths with guidance on what to learn for specific
+                                roles and industries.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Python Success Stories</h2>
+                    <p>
+                        Our students have gone on to work at top companies using Python.
+                    </p>
+                </div>
+                <div class="testimonial-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Student Testimonial"
+                        class="testimonial-avatar"
+                    />
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-quote">
+                        "After completing the Python Data Science course, I landed a job as
+                        a Data Analyst at a tech startup. The projects were exactly what
+                        interviewers wanted to see in my portfolio."
+                    </p>
+                    <p class="testimonial-author">Michael Chen</p>
+                    <p class="testimonial-role">Data Analyst at TechStart</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="interactive-code" class="interactive-code-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Try Python in Your Browser</h2>
+                    <p>
+                        Experiment with Python right here - no setup required!
+                    </p>
+                </div>
+                <div id="code-editor-container">
+                    <textarea id="code-editor">
+# Welcome to Python Playground!
+def greet(name):
+    return f"Hello, {name}! Welcome to NerdForge."
+
+print(greet("Python Developer"))
+print("Try writing your own Python code below!")
+
+# Calculate factorial
+def factorial(n):
+    return 1 if n == 0 else n * factorial(n-1)
+
+print(f"Factorial of 5 is: {factorial(5)}")
+                    </textarea>
+                    <div class="editor-actions">
+                        <button id="run-code-btn" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Run Python Code
+                        </button>
+                        <button id="reset-code-btn" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                    <div id="output-container">
+                        <div class="output-header">
+                            <h4>Output</h4>
+                            <button id="clear-output-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                        <pre id="code-output"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Start Your Python Journey?</h2>
+                <p>
+                    Join thousands of students who've transformed their careers with Python.
+                </p>
+                <button class="btn btn-primary btn-large">
+                    Enroll Now <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h2 class="footer-logo-text">NerdForge</h2>
+                    </a>
+                    <p class="footer-tagline">
+                        Forging the next generation of Python developers
+                    </p>
+                </div>
+                <div class="footer-links-container">
+                    <ul class="footer-links">
+                        <li><h3>Learn</h3></li>
+                        <li><a href="#courses">Python Courses</a></li>
+                        <li><a href="#">Learning Paths</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Challenges</a></li>
+                    </ul>
+                    <ul class="footer-links">
+                        <li><h3>Company</h3></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                    <ul class="footer-links">
+                        <li><h3>Support</h3></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-socials">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <h3>Python Newsletter</h3>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Cookies</a>
+                </div>
+                <div class="footer-copyright">
+                    © 2024 NerdForge. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/skulpt/0.10.0/skulpt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/skulpt/0.10.0/skulpt-stdlib.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

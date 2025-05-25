@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NerdForge | About Us</title>
+    <meta name="description" content="Learn more about NerdForge and our mission to empower aspiring tech professionals.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --text: #212529;
+            --accent: #6f42c1;
+            --accent-light: #9b71dc;
+            --accent-dark: #563d7c;
+            --card: #ffffff;
+            --card-hover: #f1e8ff;
+            --gradient: linear-gradient(135deg, #6f42c1 0%, #9b71dc 100%);
+            --success: #28a745;
+            --warning: #ffc107;
+            --error: #dc3545;
+            --metal-dark: #2b3035;
+            --metal-light: #495057;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Space Grotesk', sans-serif;
+        }
+        [data-theme='dark'] {
+            --bg: #121212;
+            --text: #f8f9fa;
+            --accent: #8a63d2;
+            --accent-light: #6f42c1;
+            --card: #1e1e1e;
+            --card-hover: #2a2a2a;
+            --gradient: linear-gradient(135deg, #8a63d2 0%, #6f42c1 100%);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        button {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Animation Keyframes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes hammer {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-15deg); }
+            75% { transform: rotate(15deg); }
+        }
+
+        @keyframes spark {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            font-family: var(--font-primary);
+        }
+
+        .btn:focus {
+            outline: 2px solid var(--accent-light);
+            outline-offset: 2px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3);
+            background-size: 200% auto;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(111, 66, 193, 0.4);
+            background-position: right center;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-secondary:hover {
+            background: rgba(111, 66, 193, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%) skewX(-15deg);
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover::after {
+            transform: translateX(100%) skewX(-15deg);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        .loading {
+            position: relative;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Improved Logo and Header */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: var(--card);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 1rem 5%;
+            backdrop-filter: blur(10px);
+            background-color: rgba(43, 48, 53, 0.9);
+        }
+
+        [data-theme='light'] .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: var(--gradient);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-top: -5px;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:focus {
+            outline: none;
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -4px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a:focus {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after, .nav-links a:focus::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: var(--card-hover);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text);
+        }
+
+        .theme-toggle:focus {
+            outline: 2px solid var(--accent-light);
+            outline-offset: 2px;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+            background: var(--accent);
+            color: white;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background: var(--card);
+            border-radius: 0.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .user-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-menu a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .user-menu a:hover {
+            background: var(--card-hover);
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 5rem 5%;
+            min-height: 90vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .hero-bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-bg-circle:nth-child(1) {
+            width: 600px;
+            height: 600px;
+            background: var(--accent);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        .hero-bg-circle:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-light);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        .hero-bg-circle:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            background: var(--warning);
+            top: 50%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: -1;
+            opacity: 0.1;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-image.loaded {
+            opacity: 0.4;
+        }
+
+
+        /* Courses Section */
+        .courses-section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .course-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: var(--card);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            background: var(--card-hover);
+        }
+
+        .course-card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .course-card-description {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .course-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .course-card-link:hover {
+            color: var(--accent-dark);
+            transform: translateX(5px);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+            background: var(--bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .feature-content {
+            flex-grow: 1;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .feature-description {
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .testimonial-card {
+            background: var(--card);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            margin: 2rem auto;
+            max-width: 80%;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            background: var(--card-hover);
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            color: var(--text);
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-stars {
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem auto;
+            border: 2px solid var(--accent-light);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--metal-dark);
+            color: var(--metal-light);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid #343a40;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .footer-logo-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .footer-logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--metal-light);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-socials a {
+            color: var(--metal-light);
+            transition: color 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity:0.8;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--card);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 2px solid #e0e0e0;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: var(--font-primary);
+            color: var(--text);
+            background: var(--card);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1);
+        }
+
+        .form-actions {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .form-link {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .form-link:hover {
+            color: var(--accent-dark);
+        }
+
+        /* About Us Page Styles */
+        .about-us-section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .about-us-header {
+            margin-bottom: 4rem;
+        }
+
+        .about-us-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-us-header p {
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-us-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 4rem;
+            padding: 0 5%;
+        }
+
+        .about-us-mission {
+            margin-bottom: 4rem;
+            text-align: left;
+            max-width: 100%;
+        }
+
+        .about-us-mission h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .about-us-mission p {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.8;
+            max-width: 100%;
+        }
+
+        .about-us-values {
+            text-align: left;
+            max-width: 100%;
+        }
+
+        .about-us-values h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .about-us-values ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .about-us-values li {
+            margin-bottom: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .about-us-values li i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 992px) {
+            .about-us-content {
+                align-items: flex-start;
+            }
+            .about-us-mission,
+            .about-us-values {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-us-header h2 {
+                font-size: 2rem;
+            }
+            .about-us-mission h3,
+            .about-us-values h3 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar" id="navbar">
+        <a href="/" class="logo">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.89 1.5c.37-.83 1.16-1.36 2.03-1.36h.11c.87 0 1.66.53 2.03 1.36l4.43 10.12a2 2 0 0 1 1.79 2.03v5.35a2 2 0 0 1-2 2H5.66a2 2 0 0 1-2-2v-5.35a2 2 0 0 1 1.79-2.03L10.89 1.5zM7.5 17a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm9 0a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0z"/></svg>
+            </div>
+            <div class="logo-wrapper">
+                <h1 class="logo-text">NerdForge</h1>
+                <span class="logo-tagline">Forge Your Future</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="#courses">Courses</a>
+            <a href="#features">Features</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="/pages/about.html">About Us</a>
+        </nav>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-sun"></i>
+                <span class="sr-only">Toggle Theme</span>
+            </button>
+            <button class="btn btn-primary" id="register-btn">Sign Up</button>
+            <div class="user-avatar" id="user-avatar">
+                <i class="fas fa-user"></i>
+                <div class="user-menu" id="user-menu">
+                    <a href="#">Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Sign Up</h2>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                <div class="form-actions">
+                    <a href="#" class="form-link" id="login-link-from-signup">Already have an account? Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <section class="about-us-section">
+            <div class="container">
+                <div class="about-us-header">
+                    <h2>About Us</h2>
+                    <p>
+                        At NerdForge, we are passionate about empowering individuals
+                        to thrive in the ever-evolving world of technology. Our
+                        mission is to provide accessible, high-quality education
+                        that equips our students with the skills and knowledge
+                        they need to launch successful tech careers.
+                    </p>
+                </div>
+                <div class="about-us-content">
+                    <div class="about-us-mission">
+                        <h3>Our Mission</h3>
+                        <p>
+                            We believe that everyone, regardless of their background
+                            or experience level, should have the opportunity to
+                            pursue a rewarding career in technology. That's why we
+                            offer a range of project-based courses designed to
+                            bridge the gap between learning and real-world
+                            application.  We strive to create a supportive and
+                            inclusive learning environment where students can
+                            collaborate, grow, and achieve their full potential.
+                        </p>
+                    </div>
+                    <div class="about-us-values">
+                        <h3>Our Values</h3>
+                        <ul>
+                            <li>
+                                <i class="fas fa-graduation-cap"></i>
+                                <strong>Excellence:</strong> We are committed to
+                                providing the highest quality education and
+                                continuously improving our programs.
+                            </li>
+                            <li>
+                                <i class="fas fa-users"></i>
+                                <strong>Community:</strong> We foster a strong and
+                                supportive community of learners, mentors, and
+                                industry professionals.
+                            </li>
+                            <li>
+                                <i class="fas fa-code"></i>
+                                <strong>Innovation:</strong> We embrace new
+                                technologies and teaching methodologies to ensure
+                                our students are always at the forefront of the
+                                industry.
+                            </li>
+                            <li>
+                                <i class="fas fa-briefcase"></i>
+                                <strong>Career Focus:</strong> We are dedicated to
+                                helping our students achieve their career goals
+                                through practical skills development and career
+                                services.
+                            </li>
+                            <li>
+                                <i class="fas fa-heart"></i>
+                                <strong>Passion:</strong> We are passionate about
+                                technology and education, and we believe that
+                                learning should be an inspiring and enjoyable
+                                experience.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h2 class="footer-logo-text">NerdForge</h2>
+                </a>
+                <ul class="footer-links">
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="footer-socials">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2024 NerdForge. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+            const themeToggle = document.getElementById('theme-toggle');
+            const userAvatar = document.getElementById('user-avatar');
+            const userMenu = document.getElementById('user-menu');
+            const registerBtn = document.getElementById('register-btn');
+            const signupModal = document.getElementById('signup-modal');
+            const modalCloseBtn = signupModal.querySelector('.modal-close');
+
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+
+                const sunIcon = themeToggle.querySelector('.fa-sun');
+                const moonIcon = themeToggle.querySelector('.fa-moon');
+
+                if (newTheme === 'dark') {
+                    if (!moonIcon) {
+                        const moonIcon = document.createElement('i');
+                        moonIcon.className = 'fas fa-moon';
+                        themeToggle.innerHTML = '';
+                        themeToggle.appendChild(moonIcon);
+                    }
+                } else {
+                    if (!sunIcon) {
+                        const sunIcon = document.createElement('i');
+                        sunIcon.className = 'fas fa-sun';
+                        themeToggle.innerHTML = '';
+                        themeToggle.appendChild(sunIcon);
+                    }
+                }
+            });
+
+            if (userAvatar) {
+                userAvatar.addEventListener('click', () => {
+                    userMenu.classList.toggle('active');
+                });
+            }
+
+            document.addEventListener('click', (event) => {
+                if (userMenu.classList.contains('active') && !userMenu.contains(event.target) && event.target !== userAvatar) {
+                    userMenu.classList.remove('active');
+                }
+            });
+
+            if (registerBtn && signupModal) {
+                registerBtn.addEventListener('click', function() {
+                    signupModal.classList.add('active');
+                });
+            }
+
+            if (modalCloseBtn && signupModal) {
+                modalCloseBtn.addEventListener('click', function() {
+                    signupModal.classList.remove('active');
+                });
+            }
+
+            window.addEventListener('click', function(event) {
+                if (event.target === signupModal) {
+                    signupModal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

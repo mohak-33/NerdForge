@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Playground | NerdForge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Consistent with original styling */
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c0;
+            --light: #f5f6fa;
+            --dark: #2d3436;
+            --gray: #636e72;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff;
+            color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header - Matches original */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--primary);
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .logo-tagline {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Buttons - Matches original */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: var(--light);
+            color: var(--dark);
+            border: 1px solid var(--gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Hero Section */
+        .code-hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .code-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .code-hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Code Playground Section */
+        .code-playground {
+            padding: 50px 0;
+        }
+
+        .exercise-selector {
+            margin-bottom: 25px;
+        }
+
+        .exercise-selector label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .exercise-selector select {
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 300px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .code-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .editor-pane, .output-pane {
+            flex: 1;
+            min-width: 0; /* Fixes flexbox overflow issue */
+        }
+
+        /* CodeMirror Editor Styling */
+        .CodeMirror {
+            height: 500px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        /* Output Pane */
+        .output-pane {
+            background: #282a36;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .output-pane h3 {
+            color: #bd93f9;
+            margin-bottom: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        #code-output {
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+
+        #code-output .error {
+            color: #ff5555;
+        }
+
+        /* Features Grid */
+        .code-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Footer - Matches original */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: #00cec9;
+        }
+
+        .footer-logo h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #b2bec3;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #00cec9;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #b2bec3;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .code-container {
+                flex-direction: column;
+            }
+            
+            .code-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (matches original) -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.89 1.5c.37-.83 1.16-1.36 2.03-1.36h.11c.87 0 1.66.53 2.03 1.36l4.43 10.12a2 2 0 0 1 1.79 2.03v5.35a2 2 0 0 1-2 2H5.66a2 2 0 0 1-2-2v-5.35a2 2 0 0 1 1.79-2.03L10.89 1.5zM7.5 17a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm9 0a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0z"/></svg>
+            </div>
+            <div class="logo-wrapper">
+                <h1 class="logo-text">NerdForge</h1>
+                <span class="logo-tagline">Forge Your Python Future</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="courses.html">Courses</a>
+            <a href="features.html">Features</a>
+            <a href="code-now.html" class="active">Code Now</a>
+            <a href="testimonials.html">Success Stories</a>
+            <a href="about.html">About Us</a>
+        </nav>
+        <div class="nav-actions">
+            <button class="btn btn-primary" id="register-btn">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="code-playground">
+        <section class="code-hero">
+            <div class="container">
+                <h1>Python Playground</h1>
+                <p class="subtitle">Write, run, and debug Python code right in your browser</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="exercise-selector">
+                <label for="exercise">Choose an exercise:</label>
+                <select id="exercise" class="form-control">
+                    <option value="blank">Blank Editor</option>
+                    <option value="hello">Hello World</option>
+                    <option value="calculator">Simple Calculator</option>
+                    <option value="fibonacci">Fibonacci Sequence</option>
+                    <option value="guessing">Guessing Game</option>
+                </select>
+            </div>
+
+            <div class="code-container">
+                <div class="editor-pane">
+                    <textarea id="python-code">
+# Welcome to NerdForge Python Playground!
+# Type your Python code here and click "Run Code"
+
+def greet(name):
+    return f"Hello, {name}! Ready to code?"
+
+print(greet("Python Developer"))
+                    </textarea>
+                    <div class="editor-actions">
+                        <button id="run-code" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Run Code
+                        </button>
+                        <button id="reset-code" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                        <button id="clear-output" class="btn btn-secondary">
+                            <i class="fas fa-trash"></i> Clear Output
+                        </button>
+                    </div>
+                </div>
+                <div class="output-pane">
+                    <h3>Output</h3>
+                    <div id="code-output"></div>
+                </div>
+            </div>
+
+            <div class="code-features">
+                <div class="feature-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python 3.11</h3>
+                    <p>Full Python 3.11 support with all standard libraries</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Instant Execution</h3>
+                    <p>See results immediately with our cloud-powered interpreter</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-book"></i>
+                    <h3>Learning Resources</h3>
+                    <p>Access Python documentation with one click</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (matches original) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <i class="fab fa-python"></i>
+                        <h2>NerdForge</h2>
+                    </a>
+                    <p>Forging the next generation of Python developers</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Learn</h3>
+                    <ul>
+                        <li><a href="courses.html">Python Courses</a></li>
+                        <li><a href="#">Learning Paths</a></li>
+                        <li><a href="#">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2024 NerdForge. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/python-hint.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    
+    <script>
+        // Initialize CodeMirror Editor
+        const editor = CodeMirror.fromTextArea(document.getElementById('python-code'), {
+            mode: 'python',
+            theme: 'dracula',
+            lineNumbers: true,
+            indentUnit: 4,
+            matchBrackets: true,
+            extraKeys: {
+                "Ctrl-Space": "autocomplete",
+                "Tab": function(cm) {
+                    if (cm.somethingSelected()) {
+                        cm.indentSelection("add");
+                    } else {
+                        cm.replaceSelection(Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+                    }
+                }
+            }
+        });
+
+        // Initialize Pyodide (Python in browser)
+        let pyodide;
+        async function initializePyodide() {
+            pyodide = await loadPyodide({
+                indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/"
+            });
+            document.getElementById('run-code').disabled = false;
+            document.getElementById('code-output').innerHTML = "Python runtime ready! Click 'Run Code' to execute.";
+        }
+        initializePyodide();
+
+        // Run Python code
+        document.getElementById('run-code').addEventListener('click', async () => {
+            const code = editor.getValue();
+            const outputDiv = document.getElementById('code-output');
+            
+            try {
+                outputDiv.innerHTML = "Running your code...<br><br>";
+                let output = '';
+                
+                pyodide.setStdout({batched: (text) => {
+                    output += text;
+                    outputDiv.innerHTML = "Running your code...<br><br>" + output.replace(/\n/g, '<br>');
+                }});
+                
+                await pyodide.runPythonAsync(code);
+            } catch (err) {
+                outputDiv.innerHTML = `<span class="error">Error:<br>${err.message.replace(/\n/g, '<br>')}</span>`;
+            }
+        });
+
+        // Exercise selector
+        document.getElementById('exercise').addEventListener('change', function() {
+            const exercise = this.value;
+            let code = '';
+            
+            switch(exercise) {
+                case 'hello':
+                    code = '# Hello World Example\ndef greet(name):\n    return f"Hello, {name}!"\n\nprint(greet("World"))';
+                    break;
+                case 'calculator':
+                    code = '# Simple Calculator\ndef add(x, y):\n    return x + y\n\ndef subtract(x, y):\n    return x - y\n\nprint("Select operation:")\nprint("1. Add")\nprint("2. Subtract")\n\nchoice = input("Enter choice (1/2): ")\nnum1 = float(input("Enter first number: "))\nnum2 = float(input("Enter second number: "))\n\nif choice == "1":\n    print(f"Result: {add(num1, num2)}")\nelif choice == "2":\n    print(f"Result: {subtract(num1, num2)}")\nelse:\n    print("Invalid input")';
+                    break;
+                case 'fibonacci':
+                    code = '# Fibonacci Sequence\ndef fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        print(a, end=" ")\n        a, b = b, a + b\n\nfibonacci(10)';
+                    break;
+                case 'guessing':
+                    code = '# Guessing Game\nimport random\n\nnumber = random.randint(1, 100)\nguess = None\nattempts = 0\n\nprint("Guess a number between 1 and 100")\n\nwhile guess != number:\n    guess = int(input("Your guess: "))\n    attempts += 1\n    \n    if guess < number:\n        print("Too low!")\n    elif guess > number:\n        print("Too high!")\n\nprint(f"Congratulations! You guessed it in {attempts} attempts.")';
+                    break;
+                default:
+                    code = '# Write your Python code here\n# Click "Run Code" to execute it\n\nprint("Hello, Python!")';
+            }
+            
+            editor.setValue(code);
+        });
+
+        // Reset button
+        document.getElementById('reset-code').addEventListener('click', function() {
+            document.getElementById('exercise').value = 'blank';
+            editor.setValue('# Write your Python code here\n# Click "Run Code" to execute it\n\nprint("Hello, Python!")');
+        });
+
+        // Clear output button
+        document.getElementById('clear-output').addEventListener('click', function() {
+            document.getElementById('code-output').innerHTML = '';
+        });
+    </script>
+</body>
+</html>
