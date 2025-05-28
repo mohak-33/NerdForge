@@ -24,7 +24,6 @@ Whether you're learning to code, brushing up on data analysis, or diving into de
 
 - HTML5
 - CSS3
-- JavaScript (vanilla or framework-based, if applicable)
+- JavaScript
 
-## Project Structure
 
